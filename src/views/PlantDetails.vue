@@ -107,16 +107,31 @@ const totalPrice = computed(() => {
   const potPrice = pots.find((p) => p.id === selectedPot.value)?.price || 0;
   return (basePrice + potPrice).toFixed(2);
 });
+
+// Mobile Image Gallery
+const gallery = ref(null);
+const currentImageIndex = ref(0);
+
+const handleGalleryScroll = () => {
+  if (!gallery.value) return;
+
+  const scrollLeft = gallery.value.scrollLeft;
+  const width = gallery.value.offsetWidth;
+  currentImageIndex.value = Math.round(scrollLeft / width);
+};
 </script>
 
 <template>
   <!-- Loading State -->
-  <div v-if="loading" class="flex justify-center items-center min-h-[400px]">
+  <div
+    v-if="loading"
+    class="flex justify-center items-center min-h-[400px] px-6"
+  >
     <RandomLoader />
   </div>
 
   <!-- Error State -->
-  <div v-else-if="error" class="text-center py-8">
+  <div v-else-if="error" class="text-center py-8 px-6">
     <div class="text-red-600 mb-4">{{ error }}</div>
     <button
       @click="router.push('/')"
@@ -128,7 +143,39 @@ const totalPrice = computed(() => {
 
   <!-- Success State -->
   <div v-else-if="plant" class="lg:flex items-start">
-    <!-- Left Column - Image Grid -->
+    <!-- Mobile Image Gallery -->
+    <div class="lg:hidden mb-8">
+      <div
+        class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar"
+        ref="gallery"
+        @scroll="handleGalleryScroll"
+      >
+        <div
+          v-for="(image, index) in plant.images"
+          :key="index"
+          class="w-full flex-shrink-0 snap-center"
+        >
+          <img
+            :src="image"
+            :alt="`${plant.name} ${index + 1}`"
+            class="w-full aspect-square object-cover rounded-lg"
+            loading="lazy"
+            crossorigin
+          />
+        </div>
+      </div>
+      <!-- Active dot indicator -->
+      <div class="flex justify-center gap-2 mt-4">
+        <div
+          v-for="(_, index) in plant.images"
+          :key="index"
+          class="w-2 h-2 rounded-full transition-colors"
+          :class="currentImageIndex === index ? 'bg-[#056f75]' : 'bg-gray-300'"
+        ></div>
+      </div>
+    </div>
+
+    <!-- Left Column - Image Grid (desktop only) -->
     <div class="lg:w-3/5 hidden lg:flex flex-wrap -m-2.5">
       <div
         v-for="(image, index) in plant.images"
@@ -148,15 +195,15 @@ const totalPrice = computed(() => {
     </div>
 
     <!-- Right Column - Plant Details -->
-    <div class="lg:w-2/5 lg:pl-16 py-5">
+    <div class="lg:w-2/5 lg:pl-16 py-5 px-6 lg:px-0">
       <div class="pr-20 md:pr-24">
         <h3
-          class="inline-block uppercase text-xs lg:text-sm tracking-wider mr-2 lg:mr-4 font-sans"
+          class="inline-block uppercase text-sm lg:text-sm tracking-wider mr-2 lg:mr-4 font-sans text-[#006F74]"
         >
           {{ plant.nickname }}
         </h3>
         <!-- Star Rating -->
-        <div class="inline-block">
+        <div class="inline-block text-[#006F74]">
           <span v-for="n in 5" :key="n" class="icon-star pr-0.5"></span>
         </div>
         <!-- Love Sticker -->
@@ -169,12 +216,12 @@ const totalPrice = computed(() => {
         />
       </div>
 
-      <h1 class="text-3xl lg:text-4xl my-3">{{ plant.name }}</h1>
+      <h1 class="text-3xl lg:text-4xl my-3 text-[#006F74]">{{ plant.name }}</h1>
       <div class="font-serif text-2xl">£{{ totalPrice }}</div>
 
       <!-- Size Selection -->
       <div class="my-6">
-        <h3 class="font-bold mb-3">Select Size</h3>
+        <h3 class="font-bold mb-3 text-[#006F74]">Select Size</h3>
         <div class="grid grid-cols-3 gap-4">
           <button
             v-for="size in sizes"
@@ -182,7 +229,7 @@ const totalPrice = computed(() => {
             @click="selectedSize = size.label"
             class="p-4 border rounded-lg text-center"
             :class="{
-              'border-green text-green': selectedSize === size.label,
+              'border-[#006F74] text-[#006F74]': selectedSize === size.label,
             }"
           >
             <img
@@ -199,7 +246,7 @@ const totalPrice = computed(() => {
 
       <!-- Pot Selection -->
       <div class="mb-6">
-        <h3 class="font-bold mb-3">Select Pot</h3>
+        <h3 class="font-bold mb-3 text-[#006F74]">Select Pot</h3>
         <div class="grid grid-cols-3 gap-4">
           <button
             v-for="pot in pots"
@@ -207,7 +254,7 @@ const totalPrice = computed(() => {
             @click="selectedPot = pot.id"
             class="p-4 border rounded-lg text-center"
             :class="{
-              'border-green text-green': selectedPot === pot.id,
+              'border-[#006F74] text-[#006F74]': selectedPot === pot.id,
             }"
           >
             <img
@@ -232,7 +279,9 @@ const totalPrice = computed(() => {
       </button>
 
       <!-- Free Delivery Notice -->
-      <div class="flex my-8 text-sm font-bold leading-none justify-center">
+      <div
+        class="flex my-8 text-sm font-bold leading-none justify-center text-[#006F74]"
+      >
         <img
           src="/assets/images/free-delivery-icon.svg"
           alt="Free delivery"
@@ -244,8 +293,8 @@ const totalPrice = computed(() => {
 
       <!-- Plant Description -->
       <div class="my-8">
-        <h3 class="font-bold text-xl mb-4">About this plant</h3>
-        <p class="text-gray-600">{{ plant.description }}</p>
+        <h3 class="font-bold text-xl mb-4 text-[#006F74]">About this plant</h3>
+        <p class="text-[#006F74]">{{ plant.description }}</p>
       </div>
 
       <!-- Bottom Icons -->
@@ -258,7 +307,9 @@ const totalPrice = computed(() => {
             loading="lazy"
             crossorigin
           />
-          <p class="text-sm font-bold mb-0">Price match promise</p>
+          <p class="text-sm font-bold mb-0 text-[#006F74]">
+            Price match promise
+          </p>
         </div>
         <div class="w-1/3 p-2 text-center">
           <img
@@ -268,7 +319,9 @@ const totalPrice = computed(() => {
             loading="lazy"
             crossorigin
           />
-          <p class="text-sm font-bold mb-0">Best quality plants guaranteed</p>
+          <p class="text-sm font-bold mb-0 text-[#006F74]">
+            Best quality plants guaranteed
+          </p>
         </div>
         <div class="w-1/3 p-2 text-center">
           <img
@@ -278,14 +331,16 @@ const totalPrice = computed(() => {
             loading="lazy"
             crossorigin
           />
-          <p class="text-sm font-bold mb-0">Delivered to your door with care</p>
+          <p class="text-sm font-bold mb-0 text-[#006F74]">
+            Delivered to your door with care
+          </p>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Fallback State -->
-  <div v-else class="text-center py-8">
+  <div v-else class="text-center py-8 px-6">
     <div class="text-gray-600 mb-4">No plant information available</div>
     <button
       @click="router.push('/')"
