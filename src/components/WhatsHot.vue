@@ -1,99 +1,17 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 
-const trendingPlants = [
-  {
-    id: 1,
-    name: "Calathea Rattlesnake",
-    nickname: "Rattlesnake Plant",
-    price: 28.99,
-    trend: "+127% this week",
-    badge: "Most Loved",
-    image: "/images/plants/calathea-rattlesnake/main.webp",
-    description:
-      "Known for its distinctive wavy leaves with dark green markings.",
-    images: [
-      "/images/plants/calathea-rattlesnake/main.webp",
-      "/images/plants/calathea-rattlesnake/lifestyle.webp",
-      "/images/plants/calathea-rattlesnake/detail.webp",
-      "/images/plants/calathea-rattlesnake/care.webp",
-    ],
-  },
-  {
-    id: 2,
-    name: "Chinese Money Plant",
-    nickname: "Pilea Peperomioides",
-    price: 24.99,
-    trend: "+92% this week",
-    badge: "Easy Care",
-    image: "/images/plants/chinese-money/main.webp",
-    description: "Distinctive round leaves and believed to bring good fortune.",
-    images: [
-      "/images/plants/chinese-money/main.webp",
-      "/images/plants/chinese-money/lifestyle.webp",
-      "/images/plants/chinese-money/detail.webp",
-      "/images/plants/chinese-money/care.webp",
-    ],
-  },
-  {
-    id: 3,
-    name: "Flamingo Flower Pink",
-    nickname: "Anthurium Pink",
-    price: 32.99,
-    trend: "+83% this week",
-    badge: "New Arrival",
-    image: "/images/plants/flamingo-flower-pink/main.webp",
-    description: "Known for its stunning pink flowers and glossy leaves.",
-    images: [
-      "/images/plants/flamingo-flower-pink/main.webp",
-      "/images/plants/flamingo-flower-pink/lifestyle.webp",
-      "/images/plants/flamingo-flower-pink/detail.webp",
-      "/images/plants/flamingo-flower-pink/care.webp",
-    ],
-  },
-  {
-    id: 4,
-    name: "Hoya Heart",
-    nickname: "Sweetheart Plant",
-    price: 19.99,
-    trend: "+75% this week",
-    badge: "Perfect Gift",
-    image: "/images/plants/hoya-heart/main.webp",
-    description: "Heart-shaped leaves make it a perfect gift for loved ones.",
-    images: [
-      "/images/plants/hoya-heart/main.webp",
-      "/images/plants/hoya-heart/lifestyle.webp",
-      "/images/plants/hoya-heart/detail.webp",
-      "/images/plants/hoya-heart/care.webp",
-    ],
-  },
-  {
-    id: 5,
-    name: "Monstera Deliciosa",
-    nickname: "Swiss Cheese Plant",
-    price: 35.99,
-    trend: "+68% this week",
-    badge: "Trending",
-    image: "/images/plants/monstera-deliciosa/main.webp",
-    description:
-      "This giant version of the Swiss Cheese Plant will be the piece de resistance in your home.",
-    images: [
-      "/images/plants/monstera-deliciosa/main.webp",
-      "/images/plants/monstera-deliciosa/lifestyle.webp",
-      "/images/plants/monstera-deliciosa/detail.webp",
-      "/images/plants/monstera-deliciosa/care.webp",
-    ],
-  },
-];
-
+const trendingPlants = ref([]);
 const currentIndex = ref(0);
 const autoScrollInterval = ref(null);
 const isHovered = ref(false);
+const loading = ref(true);
 
 const startAutoScroll = () => {
   autoScrollInterval.value = setInterval(() => {
-    if (!isHovered.value) {
-      currentIndex.value = (currentIndex.value + 1) % trendingPlants.length;
+    if (!isHovered.value && trendingPlants.value.length > 0) {
+      currentIndex.value =
+        (currentIndex.value + 1) % trendingPlants.value.length;
     }
   }, 3000);
 };
@@ -104,7 +22,24 @@ const stopAutoScroll = () => {
   }
 };
 
-onMounted(() => {
+const fetchTrendingPlants = async () => {
+  try {
+    loading.value = true;
+    const response = await fetch("http://localhost:3001/plants");
+    if (!response.ok) {
+      throw new Error("Failed to fetch plants");
+    }
+    const plants = await response.json();
+    trendingPlants.value = plants;
+  } catch (error) {
+    console.error("Error fetching trending plants:", error);
+  } finally {
+    loading.value = false;
+  }
+};
+
+onMounted(async () => {
+  await fetchTrendingPlants();
   startAutoScroll();
 });
 
@@ -122,8 +57,16 @@ onUnmounted(() => {
       Trending plants our community is loving right now
     </p>
 
-    <!-- Full-width Carousel -->
+    <!-- Loading State -->
+    <div v-if="loading" class="flex justify-center items-center min-h-[400px]">
+      <div
+        class="animate-spin rounded-full h-12 w-12 border-4 border-[#056f75] border-t-transparent"
+      ></div>
+    </div>
+
+    <!-- Carousel -->
     <div
+      v-else
       class="relative max-w-[90vw] mx-auto"
       @mouseenter="isHovered = true"
       @mouseleave="isHovered = false"
@@ -133,7 +76,6 @@ onUnmounted(() => {
           class="flex transition-transform duration-700 ease-in-out p-4"
           :style="{ transform: `translateX(-${currentIndex * 20}%)` }"
         >
-          <!-- Duplicate plants array for infinite scroll effect -->
           <div
             v-for="plant in [...trendingPlants, ...trendingPlants]"
             :key="`${plant.id}-${Math.random()}`"
@@ -146,7 +88,6 @@ onUnmounted(() => {
               <div
                 class="bg-white rounded-lg shadow-xl overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:z-10"
               >
-                <!-- Image Container -->
                 <div class="relative aspect-square">
                   <img
                     :src="plant.image"
@@ -160,7 +101,6 @@ onUnmounted(() => {
                   </div>
                 </div>
 
-                <!-- Content -->
                 <div class="p-6">
                   <div
                     class="bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm w-fit mb-3"
@@ -188,7 +128,10 @@ onUnmounted(() => {
       </div>
 
       <!-- Dots Navigation -->
-      <div class="flex justify-center gap-2 mt-8">
+      <div
+        v-if="trendingPlants.length > 0"
+        class="flex justify-center gap-2 mt-8"
+      >
         <button
           v-for="(_, index) in trendingPlants"
           :key="index"

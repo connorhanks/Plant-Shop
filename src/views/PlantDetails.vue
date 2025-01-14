@@ -41,14 +41,13 @@ onMounted(async () => {
     loading.value = true;
     error.value = null;
 
-    const plants = await fetchPlants();
-    const foundPlant = plants.find((p) => p.id === parseInt(plantId));
-
-    if (!foundPlant) {
+    const response = await fetch(`http://localhost:3001/plants/${plantId}`);
+    if (!response.ok) {
       throw new Error(`Plant with ID ${plantId} not found`);
     }
 
-    plant.value = foundPlant;
+    const data = await response.json();
+    plant.value = data;
   } catch (err) {
     error.value = err.message;
     console.error("Error fetching plant:", err);
