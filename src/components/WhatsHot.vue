@@ -194,14 +194,14 @@ onUnmounted(() => {
 
 .scribble-underline {
   background: url(@/assets/scribble-underline.svg) no-repeat 100% 100%/221px
-    18px;
-  padding-bottom: 8px;
+    24px;
+  padding-bottom: 14px;
 }
 
 @media (max-width: 768px) {
   .scribble-underline {
-    background-size: 150px 12px;
-    padding-bottom: 6px;
+    background-size: 150px 18px;
+    padding-bottom: 12px;
   }
 }
 </style>
