@@ -1,33 +1,58 @@
 <script setup>
 import { ref, onMounted, computed } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
+import RandomLoader from "@/components/RandomLoader.vue";
 
 const route = useRoute();
+const router = useRouter();
 const plantId = route.params.id;
 const selectedSize = ref("70cm");
 const selectedPot = ref("nursery");
 const plant = ref(null);
 const loading = ref(true);
+const error = ref(null);
+
+// Cache for plants data
+const plantsCache = ref(new Map());
+
+async function fetchPlants() {
+  // Check cache first
+  if (plantsCache.value.size > 0) {
+    console.log("Using cached plants data");
+    return Array.from(plantsCache.value.values());
+  }
+
+  const response = await fetch("http://localhost:3001/plants");
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  const plants = await response.json();
+
+  // Cache the plants
+  plants.forEach((plant) => {
+    plantsCache.value.set(plant.id, plant);
+  });
+
+  return plants;
+}
 
 onMounted(async () => {
   try {
-    console.log("Fetching plant with ID:", plantId);
-    // Get all plants and find the one we want
-    const response = await fetch("http://localhost:3001/plants");
-    if (!response.ok) {
-      throw new Error("Failed to fetch plants");
-    }
-    const plants = await response.json();
+    loading.value = true;
+    error.value = null;
+
+    const plants = await fetchPlants();
     const foundPlant = plants.find((p) => p.id === parseInt(plantId));
 
     if (!foundPlant) {
-      throw new Error("Plant not found");
+      throw new Error(`Plant with ID ${plantId} not found`);
     }
 
     plant.value = foundPlant;
-    loading.value = false;
-  } catch (error) {
-    console.error("Error fetching plant:", error);
+  } catch (err) {
+    error.value = err.message;
+    console.error("Error fetching plant:", err);
+  } finally {
     loading.value = false;
   }
 });
@@ -86,8 +111,23 @@ const totalPrice = computed(() => {
 </script>
 
 <template>
-  <div v-if="loading" class="text-center py-8">Loading...</div>
+  <!-- Loading State -->
+  <div v-if="loading" class="flex justify-center items-center min-h-[400px]">
+    <RandomLoader />
+  </div>
 
+  <!-- Error State -->
+  <div v-else-if="error" class="text-center py-8">
+    <div class="text-red-600 mb-4">{{ error }}</div>
+    <button
+      @click="router.push('/')"
+      class="bg-[#056f75] text-white px-6 py-2 rounded hover:bg-[#034c50] transition-colors"
+    >
+      Return Home
+    </button>
+  </div>
+
+  <!-- Success State -->
   <div v-else-if="plant" class="lg:flex items-start">
     <!-- Left Column - Image Grid -->
     <div class="lg:w-3/5 hidden lg:flex flex-wrap -m-2.5">
@@ -245,7 +285,16 @@ const totalPrice = computed(() => {
     </div>
   </div>
 
-  <div v-else class="text-center py-8">Plant not found</div>
+  <!-- Fallback State -->
+  <div v-else class="text-center py-8">
+    <div class="text-gray-600 mb-4">No plant information available</div>
+    <button
+      @click="router.push('/')"
+      class="bg-[#056f75] text-white px-6 py-2 rounded hover:bg-[#034c50] transition-colors"
+    >
+      Return Home
+    </button>
+  </div>
 </template>
 
 <style scoped>
