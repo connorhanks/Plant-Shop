@@ -1,0 +1,79 @@
+{
+  "plants": [
+    {
+      "id": 1,
+      "name": "Calathea Rattlesnake",
+      "nickname": "Rattlesnake Plant",
+      "price": 28.99,
+      "trend": "+127% this week",
+      "badge": "Most Loved",
+      "description": "Known for its distinctive wavy leaves with dark green markings.",
+      "images": [
+        "/images/plants/calathea-rattlesnake/main.webp",
+        "/images/plants/calathea-rattlesnake/lifestyle.webp",
+        "/images/plants/calathea-rattlesnake/detail.webp",
+        "/images/plants/calathea-rattlesnake/care.webp"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Chinese Money Plant",
+      "nickname": "Pilea Peperomioides",
+      "price": 24.99,
+      "trend": "+92% this week",
+      "badge": "Easy Care",
+      "description": "Distinctive round leaves and believed to bring good fortune.",
+      "images": [
+        "/images/plants/chinese-money/main.webp",
+        "/images/plants/chinese-money/lifestyle.webp",
+        "/images/plants/chinese-money/detail.webp",
+        "/images/plants/chinese-money/care.webp"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Flamingo Flower Pink",
+      "nickname": "Anthurium Pink",
+      "price": 32.99,
+      "trend": "+83% this week",
+      "badge": "New Arrival",
+      "description": "Known for its stunning pink flowers and glossy leaves.",
+      "images": [
+        "/images/plants/flamingo-flower-pink/main.webp",
+        "/images/plants/flamingo-flower-pink/lifestyle.webp",
+        "/images/plants/flamingo-flower-pink/detail.webp",
+        "/images/plants/flamingo-flower-pink/care.webp"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Hoya Heart",
+      "nickname": "Sweetheart Plant",
+      "price": 19.99,
+      "trend": "+75% this week",
+      "badge": "Perfect Gift",
+      "description": "Heart-shaped leaves make it a perfect gift for loved ones.",
+      "images": [
+        "/images/plants/hoya-heart/main.webp",
+        "/images/plants/hoya-heart/lifestyle.webp",
+        "/images/plants/hoya-heart/detail.webp",
+        "/images/plants/hoya-heart/care.webp"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Monstera Deliciosa",
+      "nickname": "Swiss Cheese Plant",
+      "price": 35.99,
+      "trend": "+68% this week",
+      "badge": "Trending",
+      "description": "This giant version of the Swiss Cheese Plant will be the piece de resistance in your home.",
+      "images": [
+        "/images/plants/monstera-deliciosa/main.webp",
+        "/images/plants/monstera-deliciosa/lifestyle.webp",
+        "/images/plants/monstera-deliciosa/detail.webp",
+        "/images/plants/monstera-deliciosa/care.webp"
+      ]
+    }
+  ]
+}

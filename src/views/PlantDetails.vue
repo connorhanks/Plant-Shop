@@ -6,28 +6,51 @@ const route = useRoute();
 const plantId = route.params.id;
 const selectedSize = ref("70cm");
 const selectedPot = ref("nursery");
+const plant = ref(null);
+const loading = ref(true);
 
-const plant = ref({
-  id: 1,
-  name: "Monstera Deliciosa",
-  nickname: "Swiss Cheese Plant",
-  price: 35.99,
-  trend: "+127% this week",
-  badge: "Most Loved",
-  description:
-    "This giant version of the Swiss Cheese Plant will be the piece de resistance in your home. These beautiful plants with jumbo size, dark green and glossy leaves have lots of large oval fenestrations, and will make the perfect statement stand-out plant anywhere indoors.",
-  images: [
-    "/images/plants/monstera-deliciosa/main.webp",
-    "/images/plants/monstera-deliciosa/lifestyle.webp",
-    "/images/plants/monstera-deliciosa/detail.webp",
-    "/images/plants/monstera-deliciosa/care.webp",
-  ],
+onMounted(async () => {
+  try {
+    console.log("Fetching plant with ID:", plantId);
+    // Get all plants and find the one we want
+    const response = await fetch("http://localhost:3001/plants");
+    if (!response.ok) {
+      throw new Error("Failed to fetch plants");
+    }
+    const plants = await response.json();
+    const foundPlant = plants.find((p) => p.id === parseInt(plantId));
+
+    if (!foundPlant) {
+      throw new Error("Plant not found");
+    }
+
+    plant.value = foundPlant;
+    loading.value = false;
+  } catch (error) {
+    console.error("Error fetching plant:", error);
+    loading.value = false;
+  }
 });
 
 const sizes = [
-  { label: "70cm", potSize: "19cm pot", price: 35.99 },
-  { label: "90cm", potSize: "24cm pot", price: 45.99 },
-  { label: "140cm", potSize: "32cm pot", price: 55.99 },
+  {
+    label: "70cm",
+    potSize: "19cm pot",
+    price: 35.99,
+    icon: "/assets/images/small-plant-icon.svg",
+  },
+  {
+    label: "90cm",
+    potSize: "24cm pot",
+    price: 45.99,
+    icon: "/assets/images/small-plant-icon.svg",
+  },
+  {
+    label: "140cm",
+    potSize: "32cm pot",
+    price: 55.99,
+    icon: "/assets/images/large-plant-icon.svg",
+  },
 ];
 
 const pots = [
@@ -63,7 +86,9 @@ const totalPrice = computed(() => {
 </script>
 
 <template>
-  <div class="lg:flex items-start">
+  <div v-if="loading" class="text-center py-8">Loading...</div>
+
+  <div v-else-if="plant" class="lg:flex items-start">
     <!-- Left Column - Image Grid -->
     <div class="lg:w-3/5 hidden lg:flex flex-wrap -m-2.5">
       <div
@@ -121,6 +146,11 @@ const totalPrice = computed(() => {
               'border-green text-green': selectedSize === size.label,
             }"
           >
+            <img
+              :src="size.icon"
+              :alt="`${size.label} plant size`"
+              class="h-12 w-12 mx-auto mb-2"
+            />
             <div class="font-bold">{{ size.label }}</div>
             <div class="text-sm text-gray-600">{{ size.potSize }}</div>
             <div class="mt-2 font-bold">£{{ size.price }}</div>
@@ -185,7 +215,7 @@ const totalPrice = computed(() => {
           <img
             src="/assets/images/price-match-promise.svg"
             alt="Price match promise"
-            class="mx-auto mb-4 w-15"
+            class="mx-auto mb-4 h-12 w-12"
             loading="lazy"
             crossorigin
           />
@@ -195,7 +225,7 @@ const totalPrice = computed(() => {
           <img
             src="/assets/images/best-quality.svg"
             alt="Best quality"
-            class="mx-auto mb-4 w-15"
+            class="mx-auto mb-4 h-12 w-12"
             loading="lazy"
             crossorigin
           />
@@ -205,7 +235,7 @@ const totalPrice = computed(() => {
           <img
             src="/assets/images/delivery-van.svg"
             alt="Delivery van"
-            class="mx-auto mb-4 w-15"
+            class="mx-auto mb-4 h-12 w-12"
             loading="lazy"
             crossorigin
           />
@@ -214,6 +244,8 @@ const totalPrice = computed(() => {
       </div>
     </div>
   </div>
+
+  <div v-else class="text-center py-8">Plant not found</div>
 </template>
 
 <style scoped>
