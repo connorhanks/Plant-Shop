@@ -10,8 +10,6 @@ import WhatsHot from "@/components/WhatsHot.vue";
 
 <template>
   <div>
-    <Navbar />
-    <Banner />
     <Hero />
     <WhatsHot />
     <!-- Expore All Plants-->
