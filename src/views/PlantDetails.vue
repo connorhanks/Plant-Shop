@@ -364,10 +364,10 @@ const addToCart = () => {
         <!-- Add to Cart Button -->
         <button
           @click="addToCart"
-          class="w-full bg-[#006F74] text-white hover:bg-[#005c61] transition-colors font-bold uppercase leading-none text-sm tracking-wider py-8 px-7"
+          class="w-full bg-[#006F74] text-white hover:bg-[#005c61] transition-colors font-bold uppercase leading-none text-sm tracking-wider py-8 px-7 flex items-center justify-center"
         >
           <span>£{{ totalPrice }} — Add to Bag</span>
-          <span class="icon-bag text-xl ml-4 align-bottom"></span>
+          <span class="icon-bag text-xl ml-4"></span>
         </button>
 
         <!-- Free Delivery Notice -->
