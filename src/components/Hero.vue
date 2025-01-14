@@ -16,11 +16,10 @@ import smileyImg from "@/assets/smiley.webp";
       />
     </div>
 
-    <!-- Rotating smiley - hidden on mobile -->
+    <!-- Rotating smiley - positioned differently on mobile -->
     <img
       :src="smileyImg"
-      class="hidden md:block absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 rotating-smiley"
-      style="width: 150px; height: 150px"
+      class="absolute left-1/2 top-[40%] md:top-1/2 transform -translate-x-1/2 -translate-y-1/2 rotating-smiley w-16 h-16 md:w-20 md:h-20 lg:w-32 lg:h-32"
       alt="Smiley face"
     />
 

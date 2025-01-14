@@ -30,12 +30,20 @@ const fetchTrendingPlants = async () => {
       throw new Error("Failed to fetch plants");
     }
     const plants = await response.json();
-    trendingPlants.value = plants;
+    if (Array.isArray(plants) && plants.length > 0) {
+      trendingPlants.value = plants;
+    }
   } catch (error) {
     console.error("Error fetching trending plants:", error);
   } finally {
     loading.value = false;
   }
+};
+
+const handleImageError = (e) => {
+  console.error("Image failed to load:", e.target.src);
+  // You could set a fallback image here if needed
+  // e.target.src = '/fallback-image.jpg';
 };
 
 onMounted(async () => {
@@ -90,9 +98,10 @@ onUnmounted(() => {
               >
                 <div class="relative aspect-square">
                   <img
-                    :src="plant.image"
+                    :src="plant.images ? plant.images[0] : ''"
                     :alt="plant.name"
                     class="w-full h-full object-cover"
+                    @error="handleImageError"
                   />
                   <div
                     class="absolute top-4 left-4 bg-[#ca6a14] text-white px-3 py-1 rounded-full text-sm"
