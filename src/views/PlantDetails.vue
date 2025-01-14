@@ -144,219 +144,248 @@ const handleGalleryScroll = () => {
   </div>
 
   <!-- Success State -->
-  <div v-else-if="plant" class="lg:flex items-start">
-    <!-- Mobile Image Gallery -->
-    <div class="lg:hidden mb-8">
-      <div
-        class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar"
-        ref="gallery"
-        @scroll="handleGalleryScroll"
-      >
+  <div
+    v-else-if="plant"
+    class="max-w-7xl mx-auto px-4 sm:px-6 sm:py-10 lg:px-8"
+  >
+    <div class="lg:flex items-start">
+      <!-- Mobile Image Gallery -->
+      <div class="lg:hidden mb-8">
+        <div
+          class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar"
+          ref="gallery"
+          @scroll="handleGalleryScroll"
+        >
+          <div
+            v-for="(image, index) in plant.images"
+            :key="index"
+            class="w-full flex-shrink-0 snap-center"
+          >
+            <img
+              :src="image"
+              :alt="`${plant.name} ${index + 1}`"
+              class="w-full aspect-square object-cover rounded-lg"
+              loading="lazy"
+              crossorigin
+            />
+          </div>
+        </div>
+        <!-- Active dot indicator -->
+        <div class="flex justify-center gap-2 mt-4">
+          <div
+            v-for="(_, index) in plant.images"
+            :key="index"
+            class="w-2 h-2 rounded-full transition-colors"
+            :class="
+              currentImageIndex === index ? 'bg-[#056f75]' : 'bg-gray-300'
+            "
+          ></div>
+        </div>
+      </div>
+
+      <!-- Left Column - Image Grid (desktop only) -->
+      <div class="lg:w-3/5 hidden lg:flex flex-wrap -m-2.5">
         <div
           v-for="(image, index) in plant.images"
           :key="index"
-          class="w-full flex-shrink-0 snap-center"
+          class="w-1/2 p-2.5"
         >
           <img
             :src="image"
             :alt="`${plant.name} ${index + 1}`"
-            class="w-full aspect-square object-cover rounded-lg"
+            class="block w-full"
+            width="280"
+            height="350"
             loading="lazy"
             crossorigin
           />
         </div>
       </div>
-      <!-- Active dot indicator -->
-      <div class="flex justify-center gap-2 mt-4">
-        <div
-          v-for="(_, index) in plant.images"
-          :key="index"
-          class="w-2 h-2 rounded-full transition-colors"
-          :class="currentImageIndex === index ? 'bg-[#056f75]' : 'bg-gray-300'"
-        ></div>
-      </div>
-    </div>
 
-    <!-- Left Column - Image Grid (desktop only) -->
-    <div class="lg:w-3/5 hidden lg:flex flex-wrap -m-2.5">
-      <div
-        v-for="(image, index) in plant.images"
-        :key="index"
-        class="w-1/2 p-2.5"
-      >
-        <img
-          :src="image"
-          :alt="`${plant.name} ${index + 1}`"
-          class="block w-full"
-          width="280"
-          height="350"
-          loading="lazy"
-          crossorigin
-        />
-      </div>
-    </div>
-
-    <!-- Right Column - Plant Details -->
-    <div class="lg:w-2/5 lg:pl-16 py-5 px-6 lg:px-0">
-      <div class="pr-20 md:pr-24">
-        <h3
-          class="inline-block uppercase text-sm lg:text-sm tracking-wider mr-2 lg:mr-4 font-sans text-[#006F74]"
-        >
-          {{ plant.nickname }}
-        </h3>
-        <!-- Star Rating -->
-        <div class="inline-block text-[#006F74]">
-          <span v-for="n in 5" :key="n" class="icon-star pr-0.5"></span>
-        </div>
-        <!-- Love Sticker -->
-        <img
-          src="/assets/stickers/love-bubble.svg"
-          alt="Love sticker"
-          class="float-right w-16 lg:w-20 -mt-14 -mr-20 lg:-mr-24"
-          loading="lazy"
-          crossorigin
-        />
-      </div>
-
-      <h1 class="text-3xl lg:text-4xl my-3 text-[#006F74]">{{ plant.name }}</h1>
-      <div class="font-serif text-2xl text-[#006F74]">£{{ totalPrice }}</div>
-
-      <!-- Plant Features -->
-      <div
-        v-if="plant.features"
-        class="my-4 inline-flex flex-wrap text-sm font-bold leading-none text-[#006F74]"
-      >
-        <div
-          v-for="feature in plant.features"
-          :key="feature.name"
-          class="flex items-center mr-6 mb-4"
-        >
+      <!-- Right Column - Plant Details -->
+      <div class="lg:w-2/5 lg:pl-16 py-5 px-6 lg:px-0">
+        <div class="pr-20 md:pr-24">
+          <h3
+            class="inline-block uppercase text-sm lg:text-sm tracking-wider mr-2 lg:mr-4 font-sans text-[#006F74]"
+          >
+            {{ plant.nickname }}
+          </h3>
+          <!-- Star Rating -->
+          <div class="inline-block text-[#006F74]">
+            <span v-for="n in 5" :key="n" class="icon-star pr-0.5"></span>
+          </div>
+          <!-- Love Sticker -->
           <img
-            :src="feature.icon"
-            :alt="feature.name"
-            class="w-6"
+            src="/assets/stickers/love-bubble.svg"
+            alt="Love sticker"
+            class="float-right w-16 lg:w-20 -mt-14 -mr-20 lg:-mr-24"
             loading="lazy"
             crossorigin
           />
-          <span class="pl-2">{{ feature.name }}</span>
         </div>
-      </div>
 
-      <!-- Size Selection -->
-      <div class="my-6">
-        <h3 class="font-bold mb-3 text-[#006F74]">Select Size</h3>
-        <div class="grid grid-cols-3 gap-4">
-          <button
-            v-for="size in sizes"
-            :key="size.label"
-            @click="selectedSize = size.label"
-            class="p-4 border rounded-lg text-center"
-            :class="{
-              'border-[#006F74] text-[#006F74]': selectedSize === size.label,
-            }"
+        <h1 class="text-3xl lg:text-4xl my-3 text-[#006F74]">
+          {{ plant.name }}
+        </h1>
+        <div class="block w-full">
+          <div
+            class="font-serif text-2xl text-[#006F74] scribble-underline inline-block"
+          >
+            £{{ totalPrice }}
+          </div>
+        </div>
+
+        <!-- Plant Categories -->
+        <div class="my-2 text-xs font-bold leading-none">
+          <router-link
+            v-for="category in plant.categories"
+            :key="category"
+            :to="`/plants/category/${category.toLowerCase().replace(' ', '-')}`"
+            class="inline-block mr-2 mb-2 rounded-full bg-[#e6f3f3] text-[#006F74] hover:bg-[#006F74] hover:text-white transition-colors p-3"
+          >
+            {{ category }}
+          </router-link>
+        </div>
+
+        <!-- Plant Features -->
+        <div
+          v-if="plant.features"
+          class="my-2 inline-flex flex-wrap text-sm font-bold leading-none text-[#006F74]"
+        >
+          <div
+            v-for="feature in plant.features"
+            :key="feature.name"
+            class="flex items-center mr-6 mb-4"
           >
             <img
-              :src="size.icon"
-              :alt="`${size.label} plant size`"
-              class="h-12 w-12 mx-auto mb-2"
+              :src="feature.icon"
+              :alt="feature.name"
+              class="w-6"
+              loading="lazy"
+              crossorigin
             />
-            <div class="font-bold">{{ size.label }}</div>
-            <div class="text-sm text-gray-600">{{ size.potSize }}</div>
-            <div class="mt-2 font-bold text-black">£{{ size.price }}</div>
-          </button>
+            <span class="pl-2">{{ feature.name }}</span>
+          </div>
         </div>
-      </div>
 
-      <!-- Pot Selection -->
-      <div class="mb-6">
-        <h3 class="font-bold mb-3 text-[#006F74]">Select Pot</h3>
-        <div class="grid grid-cols-3 gap-4">
-          <button
-            v-for="pot in pots"
-            :key="pot.id"
-            @click="selectedPot = pot.id"
-            class="p-4 border rounded-lg text-center"
-            :class="{
-              'border-[#006F74] text-[#006F74]': selectedPot === pot.id,
-            }"
-          >
+        <!-- Size Selection -->
+        <div class="my-2">
+          <h3 class="font-bold mb-3 text-[#006F74]">Select Size</h3>
+          <div class="grid grid-cols-3 gap-4">
+            <button
+              v-for="size in sizes"
+              :key="size.label"
+              @click="selectedSize = size.label"
+              class="p-4 border rounded-lg text-center"
+              :class="{
+                'border-[#006F74] text-[#006F74]': selectedSize === size.label,
+              }"
+            >
+              <img
+                :src="size.icon"
+                :alt="`${size.label} plant size`"
+                class="h-12 w-12 mx-auto mb-2"
+              />
+              <div class="font-bold">{{ size.label }}</div>
+              <div class="text-sm text-gray-600">{{ size.potSize }}</div>
+              <div class="mt-2 font-bold text-black">£{{ size.price }}</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Pot Selection -->
+        <div class="mt-4 mb-6">
+          <h3 class="font-bold mb-3 text-[#006F74]">Select Pot</h3>
+          <div class="grid grid-cols-3 gap-4">
+            <button
+              v-for="pot in pots"
+              :key="pot.id"
+              @click="selectedPot = pot.id"
+              class="p-4 border rounded-lg text-center"
+              :class="{
+                'border-[#006F74] text-[#006F74]': selectedPot === pot.id,
+              }"
+            >
+              <img
+                :src="pot.image"
+                :alt="pot.name"
+                class="w-full h-32 object-cover rounded-lg mb-2"
+              />
+              <div class="font-bold">{{ pot.name }}</div>
+              <div class="mt-2">
+                {{ pot.price === 0 ? "Free" : `+£${pot.price}` }}
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Add to Cart Button -->
+        <button
+          class="w-full bg-orange text-white hover:bg-yellow hover:text-white transition duration-300 font-bold uppercase leading-none text-sm tracking-wider py-8 px-7"
+        >
+          <span>£{{ totalPrice }} — Add to Bag</span>
+          <span class="icon-bag text-xl ml-4 align-bottom"></span>
+        </button>
+
+        <!-- Free Delivery Notice -->
+        <div
+          class="flex my-8 text-sm font-bold leading-none justify-center text-[#006F74]"
+        >
+          <img
+            src="/assets/images/free-delivery-icon.svg"
+            alt="Free delivery"
+            loading="lazy"
+            crossorigin
+          />
+          <span class="pl-2">FREE delivery on orders over £50</span>
+        </div>
+
+        <!-- Plant Description -->
+        <div class="my-8">
+          <h3 class="font-bold text-xl mb-4 text-[#006F74]">
+            About this plant
+          </h3>
+          <p class="text-[#006F74]">{{ plant.description }}</p>
+        </div>
+
+        <!-- Bottom Icons -->
+        <div class="flex mt-12">
+          <div class="w-1/3 p-2 text-center">
             <img
-              :src="pot.image"
-              :alt="pot.name"
-              class="w-full h-32 object-cover rounded-lg mb-2"
+              src="/assets/images/price-match-promise.svg"
+              alt="Price match promise"
+              class="mx-auto mb-4 h-12 w-12"
+              loading="lazy"
+              crossorigin
             />
-            <div class="font-bold">{{ pot.name }}</div>
-            <div class="mt-2">
-              {{ pot.price === 0 ? "Free" : `+£${pot.price}` }}
-            </div>
-          </button>
-        </div>
-      </div>
-
-      <!-- Add to Cart Button -->
-      <button
-        class="w-full bg-orange text-white hover:bg-yellow hover:text-white transition duration-300 font-bold uppercase leading-none text-sm tracking-wider py-8 px-7"
-      >
-        <span>£{{ totalPrice }} — Add to Bag</span>
-        <span class="icon-bag text-xl ml-4 align-bottom"></span>
-      </button>
-
-      <!-- Free Delivery Notice -->
-      <div
-        class="flex my-8 text-sm font-bold leading-none justify-center text-[#006F74]"
-      >
-        <img
-          src="/assets/images/free-delivery-icon.svg"
-          alt="Free delivery"
-          loading="lazy"
-          crossorigin
-        />
-        <span class="pl-2">FREE scheduled deliveries on orders over £50</span>
-      </div>
-
-      <!-- Plant Description -->
-      <div class="my-8">
-        <h3 class="font-bold text-xl mb-4 text-[#006F74]">About this plant</h3>
-        <p class="text-[#006F74]">{{ plant.description }}</p>
-      </div>
-
-      <!-- Bottom Icons -->
-      <div class="flex mt-12">
-        <div class="w-1/3 p-2 text-center">
-          <img
-            src="/assets/images/price-match-promise.svg"
-            alt="Price match promise"
-            class="mx-auto mb-4 h-12 w-12"
-            loading="lazy"
-            crossorigin
-          />
-          <p class="text-sm font-bold mb-0 text-[#006F74]">
-            Price match promise
-          </p>
-        </div>
-        <div class="w-1/3 p-2 text-center">
-          <img
-            src="/assets/images/best-quality.svg"
-            alt="Best quality"
-            class="mx-auto mb-4 h-12 w-12"
-            loading="lazy"
-            crossorigin
-          />
-          <p class="text-sm font-bold mb-0 text-[#006F74]">
-            Best quality plants guaranteed
-          </p>
-        </div>
-        <div class="w-1/3 p-2 text-center">
-          <img
-            src="/assets/images/delivery-van.svg"
-            alt="Delivery van"
-            class="mx-auto mb-4 h-12 w-12"
-            loading="lazy"
-            crossorigin
-          />
-          <p class="text-sm font-bold mb-0 text-[#006F74]">
-            Delivered to your door with care
-          </p>
+            <p class="text-sm font-bold mb-0 text-[#006F74]">
+              Price match promise
+            </p>
+          </div>
+          <div class="w-1/3 p-2 text-center">
+            <img
+              src="/assets/images/best-quality.svg"
+              alt="Best quality"
+              class="mx-auto mb-4 h-12 w-12"
+              loading="lazy"
+              crossorigin
+            />
+            <p class="text-sm font-bold mb-0 text-[#006F74]">
+              Best quality plants guaranteed
+            </p>
+          </div>
+          <div class="w-1/3 p-2 text-center">
+            <img
+              src="/assets/images/delivery-van.svg"
+              alt="Delivery van"
+              class="mx-auto mb-4 h-12 w-12"
+              loading="lazy"
+              crossorigin
+            />
+            <p class="text-sm font-bold mb-0 text-[#006F74]">
+              Delivered to your door with care
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -397,5 +426,18 @@ const handleGalleryScroll = () => {
 
 .icon-info-circle-solid::before {
   content: "ℹ";
+}
+
+.scribble-underline {
+  background: url(@/assets/scribble-underline.svg) no-repeat 0 100%/100% 18px;
+  padding-bottom: 12px;
+  margin-bottom: 8px;
+}
+
+@media (max-width: 768px) {
+  .scribble-underline {
+    background-size: 100% 12px;
+    padding-bottom: 10px;
+  }
 }
 </style>

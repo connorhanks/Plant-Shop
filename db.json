@@ -8,6 +8,7 @@
       "trend": "+68% this week",
       "badge": "Trending",
       "description": "This giant version of the Swiss Cheese Plant will be the piece de resistance in your home.",
+      "categories": ["Living Room Plants", "Statement Plants", "Air Purifying"],
       "features": [
         {
           "name": "Easy-care",
@@ -41,6 +42,7 @@
       "trend": "+92% this week",
       "badge": "Easy Care",
       "description": "Distinctive round leaves and believed to bring good fortune.",
+      "categories": ["Desktop Plants", "Bedroom Plants", "Small Plants"],
       "features": [
         {
           "name": "Easy-care",
@@ -70,6 +72,11 @@
       "trend": "+83% this week",
       "badge": "New Arrival",
       "description": "Known for its stunning pink flowers and glossy leaves.",
+      "categories": [
+        "Flowering Plants",
+        "Living Room Plants",
+        "Bathroom Plants"
+      ],
       "features": [
         {
           "name": "Easy-care",
@@ -99,6 +106,7 @@
       "trend": "+75% this week",
       "badge": "Perfect Gift",
       "description": "Heart-shaped leaves make it a perfect gift for loved ones.",
+      "categories": ["Gift Plants", "Desktop Plants", "Small Plants"],
       "features": [
         {
           "name": "Easy-care",
@@ -128,6 +136,7 @@
       "trend": "+127% this week",
       "badge": "Most Loved",
       "description": "Known for its distinctive wavy leaves with dark green markings.",
+      "categories": ["Air Purifying", "Bathroom Plants", "Bedroom Plants"],
       "features": [
         {
           "name": "Easy-care",
