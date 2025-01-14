@@ -19,7 +19,8 @@ import smileyImg from "@/assets/smiley.webp";
     <!-- Rotating smiley - hidden on mobile -->
     <img
       :src="smileyImg"
-      class="hidden md:block absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 md:w-25 md:h-25 rotating-smiley"
+      class="hidden md:block absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 rotating-smiley"
+      style="width: 150px; height: 150px"
       alt="Smiley face"
     />
 
@@ -33,9 +34,9 @@ import smileyImg from "@/assets/smiley.webp";
         gardening.
       </p>
       <p class="max-w-[600px] text-center md:text-left text-sm md:text-base">
-        The Stem is your one-stop shop for all things green. We bring you closer
-        to nature by delivering indoor plants, outdoor plants, plant pots,
-        accessories, and seeds & bulbs straight to your door.
+        Aloe There is your one-stop shop for all things green. We bring you
+        closer to nature by delivering indoor plants, outdoor plants, plant
+        pots, accessories and seeds & bulbs straight to your door.
       </p>
 
       <!-- CTA buttons -->

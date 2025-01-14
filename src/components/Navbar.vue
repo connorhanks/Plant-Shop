@@ -34,7 +34,7 @@ onUnmounted(() => {
     class="flex items-center justify-between flex-col py-6 px-10 gap-2 text-[#056f75]"
   >
     <div class="w-full flex md:justify-center justify-between items-center">
-      <p class="font-bold text-[36px]">Plant Shop</p>
+      <p class="font-bold text-[36px]">Aloe There</p>
       <!-- Classic hamburger menu with stopPropagation -->
       <button @click.stop="toggleMenu" class="md:hidden">
         <svg
