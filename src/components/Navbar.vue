@@ -32,15 +32,17 @@ onUnmounted(() => {
 <template>
   <nav
     ref="navRef"
-    class="flex items-center justify-between flex-col py-6 px-10 gap-2 text-[#056f75]"
+    class="flex items-center justify-between flex-col py-3 md:py-6 px-6 md:px-10 gap-2 text-[#056f75]"
   >
     <div class="w-full flex md:justify-center justify-between items-center">
-      <RouterLink to="/" class="font-bold text-[36px]">Aloe There</RouterLink>
+      <RouterLink to="/" class="font-bold text-[28px] md:text-[36px]"
+        >Aloe There</RouterLink
+      >
       <!-- Classic hamburger menu with stopPropagation -->
       <button @click.stop="toggleMenu" class="md:hidden">
         <svg
           v-if="!isMenuOpen"
-          class="h-8 w-8"
+          class="h-6 w-6 md:h-8 md:w-8"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -51,7 +53,7 @@ onUnmounted(() => {
         </svg>
         <svg
           v-else
-          class="h-8 w-8"
+          class="h-6 w-6 md:h-8 md:w-8"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -65,10 +67,8 @@ onUnmounted(() => {
     <!-- Menu items -->
     <ul
       :class="[
-        'flex font-semibold uppercase text-sm transition-all duration-300',
-        isMenuOpen
-          ? 'max-h-96 opacity-100'
-          : 'max-h-0 md:max-h-96 opacity-0 md:opacity-100',
+        'md:flex font-semibold uppercase text-sm transition-all duration-300',
+        isMenuOpen ? 'flex' : 'hidden',
         'flex-col w-full items-center gap-4',
         'md:flex-row md:flex-wrap md:justify-center md:gap-6',
       ]"
