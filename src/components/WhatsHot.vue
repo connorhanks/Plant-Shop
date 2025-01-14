@@ -7,6 +7,7 @@ const currentIndex = ref(0);
 const autoScrollInterval = ref(null);
 const isHovered = ref(false);
 const loading = ref(true);
+const error = ref(null);
 const isMobile = ref(window.innerWidth < 768);
 
 const startAutoScroll = () => {
@@ -27,16 +28,25 @@ const stopAutoScroll = () => {
 const fetchTrendingPlants = async () => {
   try {
     loading.value = true;
-    const response = await fetch("http://localhost:3001/plants");
+    error.value = null;
+    const baseUrl = "http://192.168.1.72:3001";
+    console.log("Fetching plants from:", baseUrl);
+    const response = await fetch(`${baseUrl}/plants`);
     if (!response.ok) {
-      throw new Error("Failed to fetch plants");
+      throw new Error(
+        `Failed to fetch plants: ${response.status} ${response.statusText}`
+      );
     }
     const plants = await response.json();
     if (Array.isArray(plants) && plants.length > 0) {
       trendingPlants.value = plants;
+      console.log("Fetched plants:", plants.length);
+    } else {
+      throw new Error("No plants data received");
     }
   } catch (error) {
     console.error("Error fetching trending plants:", error);
+    error.value = error.message;
   } finally {
     loading.value = false;
   }
@@ -79,6 +89,19 @@ onUnmounted(() => {
       <div
         class="animate-spin rounded-full h-12 w-12 border-4 border-[#056f75] border-t-transparent"
       ></div>
+    </div>
+
+    <!-- Error State -->
+    <div
+      v-else-if="error"
+      class="text-center text-red-600 min-h-[200px] flex items-center justify-center"
+    >
+      <div>
+        <p class="mb-2">{{ error }}</p>
+        <button @click="fetchTrendingPlants" class="text-[#056f75] underline">
+          Try Again
+        </button>
+      </div>
     </div>
 
     <!-- Mobile Carousel -->
