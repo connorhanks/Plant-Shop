@@ -2,17 +2,35 @@
   "plants": [
     {
       "id": 1,
-      "name": "Calathea Rattlesnake",
-      "nickname": "Rattlesnake Plant",
-      "price": 28.99,
-      "trend": "+127% this week",
-      "badge": "Most Loved",
-      "description": "Known for its distinctive wavy leaves with dark green markings.",
+      "name": "Monstera Deliciosa",
+      "nickname": "Swiss Cheese Plant",
+      "price": 35.99,
+      "trend": "+68% this week",
+      "badge": "Trending",
+      "description": "This giant version of the Swiss Cheese Plant will be the piece de resistance in your home.",
+      "features": [
+        {
+          "name": "Easy-care",
+          "icon": "/assets/images/features/easy-care.svg"
+        },
+        {
+          "name": "Indirect sun",
+          "icon": "/assets/images/features/indirect-sun.svg"
+        },
+        {
+          "name": "Pet safe",
+          "icon": "/assets/images/features/pet-safe.svg"
+        },
+        {
+          "name": "Best-seller",
+          "icon": "/assets/images/features/best-seller.svg"
+        }
+      ],
       "images": [
-        "/images/plants/calathea-rattlesnake/main.webp",
-        "/images/plants/calathea-rattlesnake/lifestyle.webp",
-        "/images/plants/calathea-rattlesnake/detail.webp",
-        "/images/plants/calathea-rattlesnake/care.webp"
+        "/images/plants/monstera-deliciosa/main.webp",
+        "/images/plants/monstera-deliciosa/lifestyle.webp",
+        "/images/plants/monstera-deliciosa/detail.webp",
+        "/images/plants/monstera-deliciosa/care.webp"
       ]
     },
     {
@@ -23,6 +41,20 @@
       "trend": "+92% this week",
       "badge": "Easy Care",
       "description": "Distinctive round leaves and believed to bring good fortune.",
+      "features": [
+        {
+          "name": "Easy-care",
+          "icon": "/assets/images/features/easy-care.svg"
+        },
+        {
+          "name": "Indirect sun",
+          "icon": "/assets/images/features/indirect-sun.svg"
+        },
+        {
+          "name": "Pet safe",
+          "icon": "/assets/images/features/pet-safe.svg"
+        }
+      ],
       "images": [
         "/images/plants/chinese-money/main.webp",
         "/images/plants/chinese-money/lifestyle.webp",
@@ -38,6 +70,20 @@
       "trend": "+83% this week",
       "badge": "New Arrival",
       "description": "Known for its stunning pink flowers and glossy leaves.",
+      "features": [
+        {
+          "name": "Easy-care",
+          "icon": "/assets/images/features/easy-care.svg"
+        },
+        {
+          "name": "Indirect sun",
+          "icon": "/assets/images/features/indirect-sun.svg"
+        },
+        {
+          "name": "Best-seller",
+          "icon": "/assets/images/features/best-seller.svg"
+        }
+      ],
       "images": [
         "/images/plants/flamingo-flower-pink/main.webp",
         "/images/plants/flamingo-flower-pink/lifestyle.webp",
@@ -53,6 +99,20 @@
       "trend": "+75% this week",
       "badge": "Perfect Gift",
       "description": "Heart-shaped leaves make it a perfect gift for loved ones.",
+      "features": [
+        {
+          "name": "Easy-care",
+          "icon": "/assets/images/features/easy-care.svg"
+        },
+        {
+          "name": "Pet safe",
+          "icon": "/assets/images/features/pet-safe.svg"
+        },
+        {
+          "name": "Top gift",
+          "icon": "/assets/images/features/top-gift.svg"
+        }
+      ],
       "images": [
         "/images/plants/hoya-heart/main.webp",
         "/images/plants/hoya-heart/lifestyle.webp",
@@ -62,17 +122,35 @@
     },
     {
       "id": 5,
-      "name": "Monstera Deliciosa",
-      "nickname": "Swiss Cheese Plant",
-      "price": 35.99,
-      "trend": "+68% this week",
-      "badge": "Trending",
-      "description": "This giant version of the Swiss Cheese Plant will be the piece de resistance in your home.",
+      "name": "Calathea Rattlesnake",
+      "nickname": "Rattlesnake Plant",
+      "price": 28.99,
+      "trend": "+127% this week",
+      "badge": "Most Loved",
+      "description": "Known for its distinctive wavy leaves with dark green markings.",
+      "features": [
+        {
+          "name": "Easy-care",
+          "icon": "/assets/images/features/easy-care.svg"
+        },
+        {
+          "name": "Indirect sun",
+          "icon": "/assets/images/features/indirect-sun.svg"
+        },
+        {
+          "name": "Pet safe",
+          "icon": "/assets/images/features/pet-safe.svg"
+        },
+        {
+          "name": "Best-seller",
+          "icon": "/assets/images/features/best-seller.svg"
+        }
+      ],
       "images": [
-        "/images/plants/monstera-deliciosa/main.webp",
-        "/images/plants/monstera-deliciosa/lifestyle.webp",
-        "/images/plants/monstera-deliciosa/detail.webp",
-        "/images/plants/monstera-deliciosa/care.webp"
+        "/images/plants/calathea-rattlesnake/main.webp",
+        "/images/plants/calathea-rattlesnake/lifestyle.webp",
+        "/images/plants/calathea-rattlesnake/detail.webp",
+        "/images/plants/calathea-rattlesnake/care.webp"
       ]
     }
   ]

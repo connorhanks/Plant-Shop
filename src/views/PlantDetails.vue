@@ -41,13 +41,16 @@ onMounted(async () => {
     loading.value = true;
     error.value = null;
 
-    const response = await fetch(`http://localhost:3001/plants/${plantId}`);
-    if (!response.ok) {
+    // Fetch all plants first
+    const plants = await fetchPlants();
+
+    // Find the specific plant from the cached data
+    const foundPlant = plants.find((p) => p.id === parseInt(plantId));
+    if (!foundPlant) {
       throw new Error(`Plant with ID ${plantId} not found`);
     }
 
-    const data = await response.json();
-    plant.value = data;
+    plant.value = foundPlant;
   } catch (err) {
     error.value = err.message;
     console.error("Error fetching plant:", err);
@@ -120,7 +123,6 @@ const handleGalleryScroll = () => {
   currentImageIndex.value = Math.round(scrollLeft / width);
 };
 </script>
-
 <template>
   <!-- Loading State -->
   <div
@@ -217,7 +219,28 @@ const handleGalleryScroll = () => {
       </div>
 
       <h1 class="text-3xl lg:text-4xl my-3 text-[#006F74]">{{ plant.name }}</h1>
-      <div class="font-serif text-2xl">£{{ totalPrice }}</div>
+      <div class="font-serif text-2xl text-[#006F74]">£{{ totalPrice }}</div>
+
+      <!-- Plant Features -->
+      <div
+        v-if="plant.features"
+        class="my-4 inline-flex flex-wrap text-sm font-bold leading-none text-[#006F74]"
+      >
+        <div
+          v-for="feature in plant.features"
+          :key="feature.name"
+          class="flex items-center mr-6 mb-4"
+        >
+          <img
+            :src="feature.icon"
+            :alt="feature.name"
+            class="w-6"
+            loading="lazy"
+            crossorigin
+          />
+          <span class="pl-2">{{ feature.name }}</span>
+        </div>
+      </div>
 
       <!-- Size Selection -->
       <div class="my-6">
@@ -239,7 +262,7 @@ const handleGalleryScroll = () => {
             />
             <div class="font-bold">{{ size.label }}</div>
             <div class="text-sm text-gray-600">{{ size.potSize }}</div>
-            <div class="mt-2 font-bold">£{{ size.price }}</div>
+            <div class="mt-2 font-bold text-black">£{{ size.price }}</div>
           </button>
         </div>
       </div>
