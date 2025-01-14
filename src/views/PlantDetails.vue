@@ -122,6 +122,13 @@ const handleGalleryScroll = () => {
   const width = gallery.value.offsetWidth;
   currentImageIndex.value = Math.round(scrollLeft / width);
 };
+
+// Plant Description
+const activeAccordion = ref(null);
+
+const toggleAccordion = (section) => {
+  activeAccordion.value = activeAccordion.value === section ? null : section;
+};
 </script>
 <template>
   <!-- Loading State -->
@@ -341,11 +348,83 @@ const handleGalleryScroll = () => {
         </div>
 
         <!-- Plant Description -->
-        <div class="my-8">
-          <h3 class="font-bold text-xl mb-4 text-[#006F74]">
-            About this plant
-          </h3>
-          <p class="text-[#006F74]">{{ plant.description }}</p>
+        <div class="accordion text-sm">
+          <div class="border-b border-[#e6f3f3]">
+            <button
+              class="accordion-trigger text-left font-bold uppercase text-xs tracking-wider flex justify-between items-center w-full pt-5 pb-2 text-[#006F74]"
+              @click="toggleAccordion('description')"
+            >
+              Description
+              <span
+                class="icon-chevron-down transform transition-transform duration-300 text-[#006F74]"
+                :class="{ 'rotate-180': activeAccordion === 'description' }"
+                >▼</span
+              >
+            </button>
+            <div
+              class="accordion-content overflow-hidden transition-all duration-300 text-[#006F74]"
+              :class="{
+                'h-0': activeAccordion !== 'description',
+                'h-auto pb-4': activeAccordion === 'description',
+              }"
+            >
+              <p>{{ plant.description }}</p>
+            </div>
+          </div>
+
+          <div class="border-b border-[#e6f3f3]">
+            <button
+              class="accordion-trigger text-left font-bold uppercase text-xs tracking-wider flex justify-between items-center w-full pt-5 pb-2 text-[#006F74]"
+              @click="toggleAccordion('size')"
+            >
+              Size Guide
+              <span
+                class="icon-chevron-down transform transition-transform duration-300 text-[#006F74]"
+                :class="{ 'rotate-180': activeAccordion === 'size' }"
+                >▼</span
+              >
+            </button>
+            <div
+              class="accordion-content overflow-hidden transition-all duration-300 text-[#006F74]"
+              :class="{
+                'h-0': activeAccordion !== 'size',
+                'h-auto pb-4': activeAccordion === 'size',
+              }"
+            >
+              <p>
+                Height is measured from the bottom of the plastic nursery pot
+                (please allow a +/-10% variance). Diameter is the nursery pot
+                diameter, so to get a pot that fits, the pot diameter should be
+                bigger.
+              </p>
+            </div>
+          </div>
+
+          <div class="border-b border-[#e6f3f3]">
+            <button
+              class="accordion-trigger text-left font-bold uppercase text-xs tracking-wider flex justify-between items-center w-full pt-5 pb-2 text-[#006F74]"
+              @click="toggleAccordion('shipping')"
+            >
+              Shipping & Returns
+              <span
+                class="icon-chevron-down transform transition-transform duration-300 text-[#006F74]"
+                :class="{ 'rotate-180': activeAccordion === 'shipping' }"
+                >▼</span
+              >
+            </button>
+            <div
+              class="accordion-content overflow-hidden transition-all duration-300 text-[#006F74]"
+              :class="{
+                'h-0': activeAccordion !== 'shipping',
+                'h-auto pb-4': activeAccordion === 'shipping',
+              }"
+            >
+              <p>
+                Our deliveries are simple! Just choose your preferred delivery
+                day during checkout.
+              </p>
+            </div>
+          </div>
         </div>
 
         <!-- Bottom Icons -->
@@ -439,5 +518,13 @@ const handleGalleryScroll = () => {
     background-size: 100% 12px;
     padding-bottom: 10px;
   }
+}
+
+.accordion-content {
+  transition: height 0.3s ease-in-out;
+}
+
+.icon-chevron-down {
+  font-size: 0.75rem;
 }
 </style>
