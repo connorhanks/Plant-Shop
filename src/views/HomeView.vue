@@ -5,6 +5,7 @@ import Hero from "@/components/Hero.vue";
 import About from "@/components/About.vue";
 import Contact from "@/components/Contact.vue";
 import Footer from "@/components/Footer.vue";
+import WhatsHot from "@/components/WhatsHot.vue";
 </script>
 
 <template>
@@ -12,6 +13,7 @@ import Footer from "@/components/Footer.vue";
     <Navbar />
     <Banner />
     <Hero />
+    <WhatsHot />
     <!-- Expore All Plants-->
     <About />
     <Contact />

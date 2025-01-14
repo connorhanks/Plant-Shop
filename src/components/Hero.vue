@@ -58,10 +58,11 @@ import smileyImg from "@/assets/smiley.webp";
   </div>
 </template>
 
-<style>
+<style scoped>
 .scribble-underline {
-  background: url(@/assets/scribble-underline.svg) no-repeat 100% 100%/100% 14px;
-  padding-bottom: 6px;
+  background: url(@/assets/scribble-underline.svg) no-repeat 100% 100%/221px
+    18px;
+  padding-bottom: 8px;
 }
 
 .rotating-smiley {
@@ -79,8 +80,8 @@ import smileyImg from "@/assets/smiley.webp";
 
 @media (max-width: 768px) {
   .scribble-underline {
-    background-size: 100% 10px;
-    padding-bottom: 4px;
+    background-size: 150px 12px;
+    padding-bottom: 6px;
   }
 }
 </style>
