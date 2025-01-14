@@ -153,7 +153,7 @@ const totalPrice = computed(() => {
         <h3
           class="inline-block uppercase text-xs lg:text-sm tracking-wider mr-2 lg:mr-4 font-sans"
         >
-          {{ plant.name }}
+          {{ plant.nickname }}
         </h3>
         <!-- Star Rating -->
         <div class="inline-block">
@@ -169,7 +169,7 @@ const totalPrice = computed(() => {
         />
       </div>
 
-      <h1 class="text-3xl lg:text-4xl my-3">{{ plant.nickname }}</h1>
+      <h1 class="text-3xl lg:text-4xl my-3">{{ plant.name }}</h1>
       <div class="font-serif text-2xl">£{{ totalPrice }}</div>
 
       <!-- Size Selection -->
