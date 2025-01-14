@@ -1,0 +1,73 @@
+@font-face {
+  font-family: "Rand";
+  src: url("@/fonts/Rand-Thin.woff2") format("woff2"),
+    url("@/fonts/Rand-Thin.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Rand";
+  src: url("@/fonts/Rand-ExtraLight.woff2") format("woff2"),
+    url("@/fonts/Rand-ExtraLight.woff") format("woff");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Rand";
+  src: url("@/fonts/Rand-Light.woff2") format("woff2"),
+    url("@/fonts/Rand-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Rand";
+  src: url("@/fonts/Rand-Regular.woff2") format("woff2"),
+    url("@/fonts/Rand-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Rand";
+  src: url("@/fonts/Rand-Medium.woff2") format("woff2"),
+    url("@/fonts/Rand-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Rand";
+  src: url("@/fonts/Rand-SemiBold.woff2") format("woff2"),
+    url("@/fonts/Rand-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Rand";
+  src: url("@/fonts/Rand-Bold.woff2") format("woff2"),
+    url("@/fonts/Rand-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Rand";
+  src: url("@/fonts/Rand-ExtraBold.woff2") format("woff2"),
+    url("@/fonts/Rand-ExtraBold.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Rand";
+  src: url("@/fonts/Rand-Black.woff2") format("woff2"),
+    url("@/fonts/Rand-Black.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+}
+
+/* Add more variations as needed */
