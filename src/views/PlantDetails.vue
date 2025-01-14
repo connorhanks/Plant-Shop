@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted, computed, onBeforeUnmount } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import RandomLoader from "@/components/RandomLoader.vue";
 
@@ -114,6 +114,7 @@ const totalPrice = computed(() => {
 // Mobile Image Gallery
 const gallery = ref(null);
 const currentImageIndex = ref(0);
+let autoScrollInterval = null;
 
 const handleGalleryScroll = () => {
   if (!gallery.value) return;
@@ -122,6 +123,30 @@ const handleGalleryScroll = () => {
   const width = gallery.value.offsetWidth;
   currentImageIndex.value = Math.round(scrollLeft / width);
 };
+
+const scrollToNextImage = () => {
+  if (!gallery.value || !plant.value) return;
+
+  const nextIndex = (currentImageIndex.value + 1) % plant.value.images.length;
+  const width = gallery.value.offsetWidth;
+
+  gallery.value.scrollTo({
+    left: nextIndex * width,
+    behavior: "smooth",
+  });
+};
+
+onMounted(() => {
+  // Start auto-scroll when component mounts
+  autoScrollInterval = setInterval(scrollToNextImage, 3000);
+});
+
+onBeforeUnmount(() => {
+  // Clean up interval when component unmounts
+  if (autoScrollInterval) {
+    clearInterval(autoScrollInterval);
+  }
+});
 
 // Plant Description
 const activeAccordion = ref(null);
