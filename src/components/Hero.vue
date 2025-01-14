@@ -6,18 +6,24 @@ import smileyImg from "@/assets/smiley.webp";
 <template>
   <div class="bg-[#007175] flex relative">
     <!-- Hero image -->
-    <img :src="heroImg" class="h-[750px]" />
+    <div class="relative w-1/2">
+      <img
+        :src="heroImg"
+        class="h-[750px] w-full object-cover"
+        alt="Hero image"
+      />
+    </div>
 
     <!-- Rotating smiley -->
     <img
       :src="smileyImg"
-      class="absolute left-[44%] top-[20%] -translate-x-1/2 -translate-y-1/2 w-25 h-25 rotating-smiley"
+      class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-25 h-25 rotating-smiley"
       alt="Smiley face"
     />
 
     <!-- Call to action -->
     <div
-      class="flex flex-col justify-center items-center w-full gap-4 text-white"
+      class="flex flex-col justify-center items-center w-1/2 gap-4 text-white"
     >
       <p class="text-5xl max-w-[600px]">
         Connecting people to
