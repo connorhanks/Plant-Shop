@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
+import { useRouter } from "vue-router";
 
 const isMenuOpen = ref(false);
 const navRef = ref(null);
@@ -34,7 +35,7 @@ onUnmounted(() => {
     class="flex items-center justify-between flex-col py-6 px-10 gap-2 text-[#056f75]"
   >
     <div class="w-full flex md:justify-center justify-between items-center">
-      <p class="font-bold text-[36px]">Aloe There</p>
+      <RouterLink to="/" class="font-bold text-[36px]">Aloe There</RouterLink>
       <!-- Classic hamburger menu with stopPropagation -->
       <button @click.stop="toggleMenu" class="md:hidden">
         <svg
