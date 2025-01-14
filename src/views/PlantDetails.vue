@@ -26,7 +26,8 @@ async function fetchPlants() {
     return Array.from(plantsCache.value.values());
   }
 
-  const response = await fetch("http://localhost:3001/plants");
+  const baseUrl = "http://192.168.1.72:3001";
+  const response = await fetch(`${baseUrl}/plants`);
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
