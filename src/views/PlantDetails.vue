@@ -2,6 +2,8 @@
 import { ref, onMounted, computed, onBeforeUnmount } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import RandomLoader from "@/components/RandomLoader.vue";
+import { useCartStore } from "@/stores/cart";
+import CartDrawer from "@/components/CartDrawer.vue";
 
 const route = useRoute();
 const router = useRouter();
@@ -14,6 +16,8 @@ const error = ref(null);
 
 // Cache for plants data
 const plantsCache = ref(new Map());
+
+const cart = useCartStore();
 
 async function fetchPlants() {
   // Check cache first
@@ -153,6 +157,11 @@ const activeAccordion = ref(null);
 
 const toggleAccordion = (section) => {
   activeAccordion.value = activeAccordion.value === section ? null : section;
+};
+
+const addToCart = () => {
+  cart.addItem(plant.value, selectedSize.value, selectedPot.value);
+  cart.toggleCart();
 };
 </script>
 <template>
@@ -353,7 +362,8 @@ const toggleAccordion = (section) => {
 
         <!-- Add to Cart Button -->
         <button
-          class="w-full bg-orange text-white hover:bg-yellow hover:text-white transition duration-300 font-bold uppercase leading-none text-sm tracking-wider py-8 px-7"
+          @click="addToCart"
+          class="w-full bg-[#006F74] text-white hover:bg-[#005c61] transition-colors font-bold uppercase leading-none text-sm tracking-wider py-8 px-7"
         >
           <span>£{{ totalPrice }} — Add to Bag</span>
           <span class="icon-bag text-xl ml-4 align-bottom"></span>
@@ -505,6 +515,9 @@ const toggleAccordion = (section) => {
       Return Home
     </button>
   </div>
+
+  <!-- Add CartDrawer component at the top level of your template -->
+  <CartDrawer />
 </template>
 
 <style scoped>

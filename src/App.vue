@@ -2,6 +2,7 @@
 import Navbar from "@/components/Navbar.vue";
 import Banner from "@/components/Banner.vue";
 import { onBeforeRouteUpdate, useRouter } from "vue-router";
+import CartDrawer from "@/components/CartDrawer.vue";
 
 const router = useRouter();
 
@@ -13,6 +14,7 @@ router.beforeEach((to, from, next) => {
 </script>
 
 <template>
+  <CartDrawer />
   <div class="min-h-screen">
     <Navbar />
     <Banner />
