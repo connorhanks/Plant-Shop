@@ -1,11 +1,13 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
+import MobileCarousel from "./MobileCarousel.vue";
 
 const trendingPlants = ref([]);
 const currentIndex = ref(0);
 const autoScrollInterval = ref(null);
 const isHovered = ref(false);
 const loading = ref(true);
+const isMobile = ref(window.innerWidth < 768);
 
 const startAutoScroll = () => {
   autoScrollInterval.value = setInterval(() => {
@@ -46,12 +48,19 @@ const handleImageError = (e) => {
   // e.target.src = '/fallback-image.jpg';
 };
 
-onMounted(async () => {
-  await fetchTrendingPlants();
+// Add resize listener
+const handleResize = () => {
+  isMobile.value = window.innerWidth < 768;
+};
+
+onMounted(() => {
+  window.addEventListener("resize", handleResize);
+  fetchTrendingPlants();
   startAutoScroll();
 });
 
 onUnmounted(() => {
+  window.removeEventListener("resize", handleResize);
   stopAutoScroll();
 });
 </script>
@@ -72,10 +81,13 @@ onUnmounted(() => {
       ></div>
     </div>
 
-    <!-- Carousel -->
+    <!-- Mobile Carousel -->
+    <MobileCarousel v-else-if="isMobile" :plants="trendingPlants" />
+
+    <!-- Desktop Carousel -->
     <div
       v-else
-      class="relative max-w-[90vw] mx-auto"
+      class="relative mx-auto"
       @mouseenter="isHovered = true"
       @mouseleave="isHovered = false"
     >
@@ -111,11 +123,6 @@ onUnmounted(() => {
                 </div>
 
                 <div class="p-6">
-                  <div
-                    class="bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm w-fit mb-3"
-                  >
-                    {{ plant.trend }}
-                  </div>
                   <h3 class="text-xl font-bold mb-1">{{ plant.name }}</h3>
                   <p class="text-gray-600 text-sm mb-3">{{ plant.nickname }}</p>
                   <div class="flex justify-between items-center">
