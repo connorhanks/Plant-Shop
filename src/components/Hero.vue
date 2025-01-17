@@ -43,12 +43,12 @@ import smileyImg from "@/assets/smiley.webp";
         class="flex flex-col sm:flex-row gap-4 sm:gap-5 max-w-[600px] w-full"
       >
         <button
-          class="bg-[#ca6a14] px-4 py-3 hover:bg-[#b55d11] transition-colors rounded-sm flex-1"
+          class="bg-secondary px-4 py-3 hover:bg-secondary-dark transition-colors rounded-sm flex-1"
         >
           Shop Indoor Plants
         </button>
         <button
-          class="bg-[#ca6a14] px-4 py-3 hover:bg-[#b55d11] transition-colors rounded-sm flex-1"
+          class="bg-secondary px-4 py-3 hover:bg-secondary-dark transition-colors rounded-sm flex-1"
         >
           Shop Plant Accessories
         </button>

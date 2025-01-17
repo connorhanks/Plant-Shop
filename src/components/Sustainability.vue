@@ -23,9 +23,9 @@ const sustainabilityStats = [
 </script>
 
 <template>
-  <section class="bg-primary text-white relative">
+  <section class="bg-primary text-white relative py-16 md:py-24">
     <img
-      class="absolute -top-8 right-14 w-28 md:w-40 md:left-14 md:right-0 lg:left-72 animate-slow-wiggle"
+      class="absolute left-1/2 -translate-x-1/2 -top-10 md:-top-14 w-28 md:w-40 animate-slow-wiggle"
       src="/assets/images/globe.svg"
       alt="Sustainability Globe"
       width="112"
@@ -33,39 +33,39 @@ const sustainabilityStats = [
       loading="lazy"
     />
 
-    <div
-      class="max-w-8xl w-full mx-auto px-6 pt-26 pb-20 sm:px-8 md:px-10 md:pt-30 md:pb-24 lg:px-12 text-lg text-center"
-    >
-      <div class="mb-14 max-w-2xl mx-auto md:mb-20">
-        <h3 class="text-4xl lg:text-5xl leading-tight lg:leading-tight">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="max-w-2xl mx-auto text-center mb-12 md:mb-16">
+        <h3 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
           Make the<br />World <span class="scribble-underline">Greener</span>
         </h3>
-        <p>
+        <p class="text-lg">
           We are on a mission to minimise the impact of plants and gardening on
           our planet. We've got a long way to go, but here are a few things
           we've done so far:
         </p>
       </div>
 
-      <div class="md:flex -m-2.5">
+      <div class="grid md:grid-cols-3 gap-8 md:gap-12 max-w-6xl mx-auto">
         <div
           v-for="(stat, index) in sustainabilityStats"
           :key="index"
-          class="mb-14 md:mb-2 md:w-1/3 max-w-sm mx-auto md:px-2.5"
+          class="text-center"
         >
-          <div class="text-5xl sm:text-5.5xl font-bold mb-4">
-            <span :class="`icon-${stat.icon} text-4xl sm:text-5xl`"></span>
+          <div class="text-4xl md:text-5xl font-bold mb-4">
+            <span
+              :class="`icon-${stat.icon} text-3xl md:text-4xl align-middle mr-2`"
+            ></span>
             <span>{{ stat.number }}</span>
             <span v-if="stat.unit" class="text-2xl">{{ stat.unit }}</span>
           </div>
-          <p class="px-14">{{ stat.description }}</p>
+          <p class="text-lg max-w-xs mx-auto">{{ stat.description }}</p>
         </div>
       </div>
 
-      <div>
+      <div class="text-center mt-12 md:mt-16">
         <router-link
           to="/sustainability"
-          class="inline-block bg-[#ca6a14] text-white hover:bg-[#b55d11] transition-colors font-bold uppercase leading-none text-xs tracking-wider py-5 px-7 mt-7"
+          class="inline-block bg-secondary hover:bg-secondary-dark text-white transition-colors font-bold uppercase text-sm tracking-wider py-4 px-8"
         >
           Sustainability
         </router-link>
@@ -76,16 +76,19 @@ const sustainabilityStats = [
 
 <style scoped>
 .scribble-underline {
-  background: url(@/assets/scribble-underline.svg) no-repeat 100% 100%/221px
-    24px;
-  padding-bottom: 14px;
+  position: relative;
+  display: inline-block;
 }
 
-@media (max-width: 768px) {
-  .scribble-underline {
-    background-size: 150px 18px;
-    padding-bottom: 12px;
-  }
+.scribble-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
+  width: 100%;
+  height: 1.5rem;
+  background: url(@/assets/scribble-underline.svg) no-repeat center bottom;
+  background-size: 100% auto;
 }
 
 .animate-slow-wiggle {
@@ -95,10 +98,16 @@ const sustainabilityStats = [
 @keyframes wiggle {
   0%,
   100% {
-    transform: rotate(-3deg);
+    transform: translateX(-50%) rotate(-3deg);
   }
   50% {
-    transform: rotate(3deg);
+    transform: translateX(-50%) rotate(3deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .scribble-underline::after {
+    height: 1.2rem;
   }
 }
 </style>
