@@ -4,28 +4,28 @@ const sustainabilityStats = [
     icon: "recycle",
     number: "30,000",
     unit: "kg",
-    description: "cardboard saved, with our no packaging deliveries in London.",
+    description: "cardboard saved through our no-packaging delivery service.",
   },
   {
     icon: "tree",
     number: "102,135",
     unit: "",
-    description: "trees planted in partnership with Eden Projects.",
+    description:
+      "trees planted in partnership with Eden Projects for reforestation.",
   },
   {
     icon: "planet",
     number: "1",
     unit: "%",
-    description:
-      "of sales to environmental nonprofits as 1% for the Planet members.",
+    description: "of sales donated to environmental nonprofits.",
   },
 ];
 </script>
 
 <template>
-  <section class="bg-primary text-white relative py-16 md:py-24">
+  <section class="bg-primary text-white relative py-16 md:py-20">
     <img
-      class="absolute left-1/2 -translate-x-1/2 -top-10 md:-top-14 w-28 md:w-40 animate-slow-wiggle"
+      class="absolute left-[20%] -translate-x-1/2 -top-10 md:-top-14 w-28 md:w-40 animate-slow-wiggle"
       src="/assets/images/globe.svg"
       alt="Sustainability Globe"
       width="112"
