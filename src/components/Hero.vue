@@ -19,7 +19,7 @@ import smileyImg from "@/assets/smiley.webp";
     <!-- Rotating smiley - positioned differently on mobile -->
     <img
       :src="smileyImg"
-      class="absolute left-1/2 top-[40%] md:top-[15%] transform -translate-x-1/2 -translate-y-1/2 rotating-smiley w-16 h-16 md:w-20 md:h-20 lg:w-32 lg:h-32"
+      class="absolute left-1/2 top-[40%] md:top-[15%] transform -translate-x-1/2 -translate-y-1/2 rotating-smiley w-24 h-24 md:w-24 md:h-24 lg:w-32 lg:h-32"
       alt="Smiley face"
     />
 

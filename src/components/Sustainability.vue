@@ -17,19 +17,19 @@ const sustainabilityStats = [
     icon: "planet",
     number: "1",
     unit: "%",
-    description: "of sales donated to environmental nonprofits.",
+    description: "of our profits are donated to environmental non-profits.",
   },
 ];
 </script>
 
 <template>
-  <section class="bg-primary text-white relative py-16 md:py-20">
+  <section class="bg-primary text-white relative py-16 md:py-24">
     <img
-      class="absolute left-[20%] -translate-x-1/2 -top-10 md:-top-14 w-28 md:w-40 animate-slow-wiggle"
+      class="absolute -translate-x-1/2 -top-10 md:-top-14 left-[20%] lg:left-[25%] xl:left-[30%] 2xl:left-[35%] w-24 sm:w-28 md:w-32 lg:w-36 xl:w-40 h-24 sm:w-28 md:h-32 lg:h-36 xl:h-40 animate-slow-wiggle"
       src="/assets/images/globe.svg"
       alt="Sustainability Globe"
-      width="112"
-      height="112"
+      width="160"
+      height="160"
       loading="lazy"
     />
 
