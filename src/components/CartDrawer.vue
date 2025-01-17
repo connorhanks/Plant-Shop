@@ -47,7 +47,7 @@ const cart = useCartStore();
             class="w-20 h-20 object-cover rounded"
           />
           <div class="flex-1">
-            <h3 class="font-bold text-[#006F74]">{{ item.name }}</h3>
+            <h3 class="font-bold text-primary">{{ item.name }}</h3>
             <p class="text-sm text-gray-600">
               Size: {{ item.selectedSize }} / Pot: {{ item.selectedPot }}
             </p>
@@ -55,14 +55,14 @@ const cart = useCartStore();
               <div class="flex items-center gap-2">
                 <button
                   @click="cart.updateQuantity(item.id, item.quantity - 1)"
-                  class="text-[#006F74] px-2"
+                  class="text-primary px-2"
                 >
                   -
                 </button>
                 <span>{{ item.quantity }}</span>
                 <button
                   @click="cart.updateQuantity(item.id, item.quantity + 1)"
-                  class="text-[#006F74] px-2"
+                  class="text-primary px-2"
                 >
                   +
                 </button>

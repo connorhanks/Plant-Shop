@@ -149,11 +149,11 @@ onUnmounted(() => {
                   <h3 class="text-xl font-bold mb-1">{{ plant.name }}</h3>
                   <p class="text-gray-600 text-sm mb-3">{{ plant.nickname }}</p>
                   <div class="flex justify-between items-center">
-                    <p class="text-2xl font-bold text-[#056f75]">
+                    <p class="text-2xl font-bold text-primary">
                       £{{ plant.price }}
                     </p>
                     <button
-                      class="bg-[#056f75] text-white px-4 py-2 rounded-sm hover:bg-[#034c50] transition-colors text-sm"
+                      class="bg-primary text-white px-4 py-2 rounded-sm hover:bg-primary/80 transition-colors text-sm"
                       @click.prevent
                     >
                       Add to Cart

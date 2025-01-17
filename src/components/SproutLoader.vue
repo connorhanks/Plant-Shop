@@ -29,7 +29,7 @@
 .stem {
   width: 4px;
   height: 0;
-  background: #056f75;
+  background: theme("colors.primary");
   position: absolute;
   bottom: 20px;
   left: 48px;
@@ -47,7 +47,7 @@
 .leaf {
   width: 20px;
   height: 20px;
-  background: #056f75;
+  background: theme("colors.primary");
   position: absolute;
   border-radius: 20px 0;
 }

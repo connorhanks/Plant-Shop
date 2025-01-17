@@ -50,7 +50,7 @@ onMounted(async () => {
     const plants = await fetchPlants();
 
     // Find the specific plant from the cached data
-    const foundPlant = plants.find((p) => p.id === parseInt(plantId));
+    const foundPlant = plants.find((p) => String(p.id) === String(plantId));
     if (!foundPlant) {
       throw new Error(`Plant with ID ${plantId} not found`);
     }
@@ -547,15 +547,15 @@ const addToCart = () => {
 }
 
 .scribble-underline {
-  background: url(@/assets/scribble-underline.svg) no-repeat 0 100%/100% 18px;
-  padding-bottom: 12px;
+  background: url(@/assets/scribble-underline.svg) no-repeat 0 100%/100% 24px;
+  padding-bottom: 14px;
   margin-bottom: 8px;
 }
 
 @media (max-width: 768px) {
   .scribble-underline {
-    background-size: 100% 12px;
-    padding-bottom: 10px;
+    background-size: 100% 18px;
+    padding-bottom: 12px;
   }
 }
 

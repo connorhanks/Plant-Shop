@@ -14,7 +14,7 @@
 .leaf {
   width: 30px;
   height: 30px;
-  background: #056f75;
+  background: theme("colors.primary");
   position: absolute;
   border-radius: 0 15px 0 15px;
   transform-origin: bottom right;

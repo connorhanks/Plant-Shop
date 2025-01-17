@@ -14,7 +14,7 @@
 .leaf {
   width: 20px;
   height: 20px;
-  background-color: #056f75;
+  background-color: theme("colors.primary");
   border-radius: 0 50% 50% 50%;
   position: absolute;
   top: 50%;
