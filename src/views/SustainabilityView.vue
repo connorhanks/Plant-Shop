@@ -1,5 +1,8 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed, onMounted } from "vue";
+import { useBlogsStore } from "@/stores/blogs";
+
+const blogsStore = useBlogsStore();
 
 const initiatives = [
   {
@@ -37,26 +40,15 @@ const initiatives = [
   },
 ];
 
-const ecoTips = [
-  {
-    title: "Water Conservation",
-    description:
-      "Learn how to water your plants efficiently and reduce water waste.",
-    image: "/src/assets/images/water-conservation.jpg",
-  },
-  {
-    title: "Natural Pest Control",
-    description:
-      "Discover eco-friendly ways to protect your plants from pests.",
-    image: "/src/assets/images/natural-pest-control.jpg",
-  },
-  {
-    title: "Composting Guide",
-    description:
-      "Turn your plant waste into nutrient-rich compost for your garden.",
-    image: "/src/assets/images/composting-guide.jpg",
-  },
-];
+const sustainabilityBlogs = computed(() => {
+  return blogsStore.blogs
+    .filter((blog) => blog.category === "sustainability")
+    .slice(0, 3);
+});
+
+onMounted(() => {
+  blogsStore.fetchBlogs();
+});
 </script>
 
 <template>
@@ -117,25 +109,51 @@ const ecoTips = [
           Sustainable <span class="scribble-underline">Plant Care</span> Tips
         </h2>
 
-        <div class="grid md:grid-cols-3 gap-8">
+        <!-- Loading State -->
+        <div v-if="blogsStore.loading" class="text-center py-12">
           <div
-            v-for="(tip, index) in ecoTips"
-            :key="index"
+            class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"
+          ></div>
+        </div>
+
+        <!-- Error State -->
+        <div
+          v-else-if="blogsStore.error"
+          class="text-center py-12 text-red-600"
+        >
+          {{ blogsStore.error }}
+        </div>
+
+        <!-- No Blogs State -->
+        <div
+          v-else-if="sustainabilityBlogs.length === 0"
+          class="text-center py-12"
+        >
+          <p class="text-lg text-gray-600">
+            Stay tuned! Sustainability tips coming soon. 🌱
+          </p>
+        </div>
+
+        <!-- Blogs Grid -->
+        <div v-else class="grid md:grid-cols-3 gap-8">
+          <div
+            v-for="blog in sustainabilityBlogs"
+            :key="blog.id"
             class="group relative overflow-hidden rounded-lg aspect-square"
           >
             <img
-              :src="tip.image"
-              :alt="tip.title"
+              :src="blog.image"
+              :alt="blog.title"
               class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
             <div
               class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6 text-white"
             >
-              <h3 class="text-xl font-bold mb-2">{{ tip.title }}</h3>
+              <h3 class="text-xl font-bold mb-2">{{ blog.title }}</h3>
               <p
                 class="text-sm opacity-90 group-hover:opacity-100 transition-opacity duration-300"
               >
-                {{ tip.description }}
+                {{ blog.subtitle }}
               </p>
             </div>
           </div>
@@ -159,10 +177,10 @@ const ecoTips = [
           <input
             type="email"
             placeholder="Enter your email"
-            class="px-6 py-3 rounded-sm flex-1 text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary"
+            class="px-6 py-3 rounded-sm flex-1 text-gray-800 border border-gray-200 focus:border-primary/30 focus:outline-none transition-colors"
           />
           <button
-            class="bg-primary hover:bg-primary/80 px-8 py-3 rounded-sm transition-colors"
+            class="bg-primary hover:bg-primary/90 px-8 py-3 rounded-sm transition-colors border border-transparent"
           >
             Subscribe
           </button>

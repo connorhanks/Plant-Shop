@@ -1,6 +1,7 @@
 <script setup>
 import Navbar from "@/components/Navbar.vue";
 import Banner from "@/components/Banner.vue";
+import Footer from "@/components/Footer.vue";
 import { onBeforeRouteUpdate, useRouter } from "vue-router";
 import CartDrawer from "@/components/CartDrawer.vue";
 
@@ -19,5 +20,6 @@ router.beforeEach((to, from, next) => {
     <Navbar />
     <Banner />
     <router-view></router-view>
+    <Footer />
   </div>
 </template>

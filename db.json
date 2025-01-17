@@ -331,6 +331,21 @@
           "text": "Remember that every plant parent started somewhere, and making mistakes is part of the learning process. Keep this guide handy as you begin your journey, and don't hesitate to ask for help from more experienced plant parents or local garden centers."
         }
       ]
+    },
+    {
+      "id": "sustainable-packaging",
+      "title": "Our Journey to Zero-Waste Packaging",
+      "subtitle": "How we're eliminating plastic from our delivery process",
+      "category": "sustainability",
+      "date": "2024-03-15",
+      "readTime": "4 min read",
+      "image": "/images/blogs/sustainable-packaging.jpg",
+      "content": [
+        {
+          "type": "text",
+          "content": "At Aloe There, we believe that delivering plants shouldn't cost the Earth. Here's how we're making our packaging sustainable..."
+        }
+      ]
     }
   ]
 }
