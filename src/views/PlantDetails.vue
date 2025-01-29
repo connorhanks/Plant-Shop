@@ -330,7 +330,14 @@ const addToCart = () => {
               />
               <div class="font-bold">{{ size.label }}</div>
               <div class="text-sm text-gray-600">{{ size.potSize }}</div>
-              <div class="mt-2 font-bold text-black">£{{ size.price }}</div>
+              <div
+                class="mt-2"
+                :class="{
+                  'text-[#006F74] font-bold': selectedSize === size.label,
+                }"
+              >
+                £{{ size.price }}
+              </div>
             </button>
           </div>
         </div>
@@ -345,7 +352,8 @@ const addToCart = () => {
               @click="selectedPot = pot.id"
               class="p-4 border rounded-lg text-center"
               :class="{
-                'border-[#006F74] text-[#006F74]': selectedPot === pot.id,
+                'border-[#006F74] text-[#006F74] font-bold':
+                  selectedPot === pot.id,
               }"
             >
               <img
