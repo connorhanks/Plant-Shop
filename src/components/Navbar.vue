@@ -129,11 +129,12 @@ onUnmounted(() => {
         'md:flex-row md:flex-wrap md:justify-center md:gap-6',
       ]"
     >
-      <li
+      <RouterLink
+        to="/plants"
         class="cursor-pointer hover:text-[#034c50] hover:scale-105 transition-transform flex items-center gap-2"
       >
         <span class="text-[#056f75] text-lg">🌿</span>Indoor Plants
-      </li>
+      </RouterLink>
       <li
         class="cursor-pointer hover:text-[#034c50] hover:scale-105 transition-transform flex items-center gap-2"
       >

@@ -2,13 +2,13 @@
 const sustainabilityStats = [
   {
     icon: "recycle",
-    number: "30,000",
+    number: "1,000",
     unit: "kg",
     description: "cardboard saved through our no-packaging delivery service.",
   },
   {
     icon: "tree",
-    number: "102,135",
+    number: "5",
     unit: "",
     description:
       "trees planted in partnership with Eden Projects for reforestation.",

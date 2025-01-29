@@ -11,7 +11,7 @@ const initiatives = [
       "Our innovative packaging solutions eliminate single-use plastics, using biodegradable materials and minimal packaging designs.",
     icon: "🌱",
     stats: {
-      number: "30,000",
+      number: "1,000",
       unit: "kg",
       detail: "of cardboard saved annually",
     },
@@ -22,7 +22,7 @@ const initiatives = [
       "For every order placed, we plant a tree through our partnership with Eden Projects, contributing to global reforestation.",
     icon: "🌳",
     stats: {
-      number: "102,135",
+      number: "5",
       unit: "",
       detail: "trees planted and counting",
     },
