@@ -135,31 +135,30 @@ onUnmounted(() => {
       >
         <span class="text-[#056f75] text-lg">🌿</span>Indoor Plants
       </RouterLink>
-      <li
+      <RouterLink
+        to="/sustainability"
         class="cursor-pointer hover:text-[#034c50] hover:scale-105 transition-transform flex items-center gap-2"
       >
-        <span class="text-[#056f75] text-lg">🪴</span>Plant Pots
-      </li>
-      <li
+        <span class="text-[#056f75] text-lg">🪴</span>Sustainability
+      </RouterLink>
+      <RouterLink
+        to="/blogs"
         class="cursor-pointer hover:text-[#034c50] hover:scale-105 transition-transform flex items-center gap-2"
       >
-        <span class="text-[#056f75] text-lg">🌺</span>Accessories
-      </li>
-      <li
+        <span class="text-[#056f75] text-lg">📰</span>Blog
+      </RouterLink>
+      <RouterLink
+        to="/about"
         class="cursor-pointer hover:text-[#034c50] hover:scale-105 transition-transform flex items-center gap-2"
       >
-        <span class="text-[#056f75] text-lg">🌱</span>Seeds & Bulbs
-      </li>
-      <li
+        <span class="text-[#056f75] text-lg">🌱</span>About Us
+      </RouterLink>
+      <RouterLink
+        to="/contact"
         class="cursor-pointer hover:text-[#034c50] hover:scale-105 transition-transform flex items-center gap-2"
       >
-        <span class="text-[#056f75] text-lg">🎁</span>Gifts
-      </li>
-      <li
-        class="cursor-pointer hover:text-[#034c50] hover:scale-105 transition-transform flex items-center gap-2"
-      >
-        <span class="text-[#056f75] text-lg">💼</span>Business
-      </li>
+        <span class="text-[#056f75] text-lg">📧</span>Contact
+      </RouterLink>
     </ul>
 
     <!-- Shopping Cart svg -->

@@ -1,6 +1,8 @@
 <script setup>
 import heroImg from "@/assets/hero.webp";
 import smileyImg from "@/assets/smiley.webp";
+import { useRouter } from "vue-router";
+const router = useRouter();
 </script>
 
 <template>
@@ -43,11 +45,13 @@ import smileyImg from "@/assets/smiley.webp";
         class="flex flex-col sm:flex-row gap-4 sm:gap-5 max-w-[600px] w-full"
       >
         <button
+          @click="router.push('/plants')"
           class="bg-secondary px-4 py-3 hover:bg-secondary-dark transition-colors rounded-sm flex-1"
         >
           Shop Indoor Plants
         </button>
         <button
+          @click="router.push('/accessories')"
           class="bg-secondary px-4 py-3 hover:bg-secondary-dark transition-colors rounded-sm flex-1"
         >
           Shop Plant Accessories
